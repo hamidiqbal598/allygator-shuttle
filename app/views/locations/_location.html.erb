@@ -1,0 +1,39 @@
+<div class="card mb-2">
+  <div class="card-body">
+    <div class="location mb-2">
+      <div class="content-container">
+        <div class="description">
+          <h1><%= location.id %>. Vehicle - <%= vehicle.uid + " ( From: " + vehicle.route + " - To: " + vehicle.try(:destination) + " )" %> </h1>
+          <h2>
+            Recorded at : <%= location.recorded_at? ? location.recorded_at.strftime("%a, %B %d, %I:%M:%S %p") : "No Recorded date"%>
+          </h2>
+          <p> </p>
+          <div class="content">
+            <%= location.latitude %> ,
+            <%= location.longitude %>
+          </div>
+          <div class="content">
+            <p2><%= location.direction %></p2>
+            , Angle :
+            <%= location.angle %>
+          </div>
+          <div class="content">
+            Distance :
+            <%= location.distance %>
+          </div>
+
+        </div>
+
+
+        <div class="author">
+
+        </div>
+
+        <div class="author">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

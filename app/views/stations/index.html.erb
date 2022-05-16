@@ -1,0 +1,72 @@
+<div id="vehicle-id" data-vehicle-id="<%= @vehicle.try(:id) %>"></div>
+
+<div class="container-fluid">
+  <hr>
+    <div class="row">
+      <div class="col-4">
+        <h1> Add New Vehicle</h1>
+        <%= render 'vehicles/form', vehicle: Vehicle.new, station: Station.first %>
+      </div>
+      <div class="col-4">
+        <h1> Vehicle List </h1>
+        <div class="vehicles-list">
+          <% if @vehicles.present? and @station.present? %>
+            <% @vehicles.each do |vehicle| %>
+              <%= link_to station_path(vehicle_id: vehicle)  do %>
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <%=  vehicle.id.to_s + "- " + vehicle.uid + " ( From: " + vehicle.route + " - To: " + vehicle.try(:destination) + " )" %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-4">
+        <% if @vehicle.present? %>
+          <div id="vehicle-id" data-vehicle-id="<%= @vehicle.try(:id) %>"></div>
+          <h1> New Location <%= @vehicle.uid %></h1>
+          <h4> From: <%= @vehicle.route %> - To: <%= @vehicle.destination %></h4>
+          <div class="chat-box">
+            <%= render 'locations/form', location: Location.new, vehicle: @vehicle, station: @station %>
+          </div>
+        <% else %>
+          <h1> Please Select Any Vehicle </h1>
+          <br>
+          <h3> List of Vehicle in the Right Box or create a new one...!!</h3>
+          <br>
+          <h5> This will open connection for specific vehicle with socket and then you can add locations for this chosen vehicle</h5>
+        <% end %>
+      </div>
+    </div>
+  <hr>
+</div>
+</div>
+
+<div class="error" id="response">
+  <hr>
+</div>
+
+<br>
+
+<div class="container-fluid">
+
+  <div id="containerIntro">
+    <h1>Locations </h1>
+    <p3 id="location-count"><%= @locations.present? ? @locations.count : 0 %></p3>
+  </div>
+
+  <div class="locations-list" id="locations">
+    <div id="list">
+      <% if @locations.present? %>
+          <% @locations.each do |location| %>
+            <%= render 'locations/location', location: location, vehicle: @vehicle %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<hr>

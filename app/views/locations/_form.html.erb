@@ -1,0 +1,36 @@
+<%= form_with(model: location, local: true) do |form| %>
+
+  <% if location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
+      <ul>
+        <% location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group mb-3">
+    <%= form.label "Add Fresh Latitude" %>
+    <%= form.text_field :latitude, class: 'form-control', placeholder: "Latitude of Vehicle" %>
+  </div>
+  <div class="form-group mb-3">
+    <%= form.label "Add Fresh Longitude" %>
+    <%= form.text_field :longitude, class: 'form-control', placeholder: "Longitude of Vehicle" %>
+  </div>
+  <div class="form-group mb-3">
+    <%= form.label "Add Recorded Time" %>
+    <br>
+    <%= form.datetime_select :recorded_at, class: 'form-control', placeholder: "Recorded time of location" %>
+  </div>
+
+  <%= form.hidden_field :vehicle_id, value: vehicle.id %>
+
+  <br>
+  <%#= form.submit "Add ", class: "btn btn-outline-primary btn-block" %>
+  <div class="input-group-append">
+    <%= form.submit "Add Fresh Location", class: "btn btn-outline-primary btn-block" %>
+  </div>
+<% end %>
+
