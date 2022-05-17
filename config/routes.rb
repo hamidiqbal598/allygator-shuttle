@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  #Specifiying the routes for the application needed right now
   get '/' => redirect { |params| 'http://localhost:3000/stations/1' }
   root to: 'stations#index'
 

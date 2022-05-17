@@ -1,10 +1,6 @@
 import consumer from "./consumer"
 
 $(document).on('turbolinks:load', function () {
-  // const locationContainer = document.getElementById('locations')
-  // locationContainer.scrollTop = locationContainer.scrollHeight;
-  // const vehiclesList = document.getElementById('vehicles-list')
-  // vehiclesList.scrollTop = vehiclesList.scrollHeight;
 })
 
 document.addEventListener('turbolinks:load', () => {
@@ -17,10 +13,12 @@ document.addEventListener('turbolinks:load', () => {
 
   consumer.subscriptions.create({ channel: "VehicleChannel", vehicle_id: vehicle_id }, {
     connected() {
+      // specify the connection with particular vehicle
       console.log("Connected with Vehicle " + vehicle_id);
     },
 
     disconnected() {
+      // specify the disconnection with particular vehicle
       console.log("Disconnected with Vehicle " + vehicle_id);
     },
 
@@ -28,7 +26,9 @@ document.addEventListener('turbolinks:load', () => {
 
       let response = data.response;
       console.log(response);
+      // Here we have the data response when action cable is being called in location controller
 
+      // If we have the AllOK response then we'll append the innerHTML
       if (response == "AllOK") {
         const locationContainer = document.getElementById('locations')
         locationContainer.innerHTML = locationContainer.innerHTML + data.location_html

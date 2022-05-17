@@ -4,12 +4,11 @@ class StationsController < ApplicationController
   before_action :set_station, only: %i[ show ]
 
   def index
-    # @stations = Station.includes(:vehicles).all
     link_to 'Show', Station.first
   end
 
   def show
-    # @stations = Station.includes(:vehicles).all
+    #Getting the needed values for stations show function
     @vehicles = @station.vehicles
     @vehicle = @vehicles.find_by(id: params[:vehicle_id]) unless params[:vehicle_id].blank?
     @locations = @vehicle.try(:locations)
@@ -18,6 +17,7 @@ class StationsController < ApplicationController
 
   private
     def set_station
+      #Setting station function
       unless params[:id].blank?
         @station = Station.find(params[:id])
       else
@@ -26,6 +26,7 @@ class StationsController < ApplicationController
     end
 
     def set_vehicle
+      #Setting Vehicle function
       unless params[:vehicle_id].blank?
         @vehicle = Vehicle.find(params[:vehicle_id])
       else
