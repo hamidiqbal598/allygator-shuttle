@@ -1,7 +1,7 @@
 class StationsController < ApplicationController
 
   include Singleton
-  before_action :set_station, only: %i[ show edit update destroy ]
+  before_action :set_station, only: %i[ show ]
 
   def index
     # @stations = Station.includes(:vehicles).all
