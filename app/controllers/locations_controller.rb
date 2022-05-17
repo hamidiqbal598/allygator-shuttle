@@ -6,6 +6,7 @@ class LocationsController < ApplicationController
   end
 
   def create
+    #Creating new location and calculating values and then responded back to action cable
     @location = Location.new(location_params)
     response = @location.set_defaults
     puts response
@@ -19,6 +20,7 @@ class LocationsController < ApplicationController
         response = "RecordNotSave"
       end
     end
+    #calling action cable for specific vehicle
     ActionCable.server.broadcast "vehicle_channel_#{@location.vehicle_id}", response: response, location: @location, location_html: location_html
 
   end
